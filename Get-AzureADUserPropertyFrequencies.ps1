@@ -8,7 +8,7 @@ Analyze Azure Active Directory users by frequency of assigned properties.
 .EXAMPLE
 PS C:\> Get-AzureADUserPropertyFrequencies.ps1
 #>
-Write-Host "`n`t`tAttempting to query Azure Active Directory.'n" -BackgroundColor Black -ForegroundColor Yellow
+Write-Host "`n`t`tAttempting to query Azure Active Directory." -BackgroundColor Black -ForegroundColor Yellow
 try{Get-AzureADUser -All $true > $null -ErrorAction stop
 }
 catch{$errMsg = $_.Exception.message
@@ -17,7 +17,7 @@ catch{$errMsg = $_.Exception.message
         Write-Output "Ensure 'AzureAD PS Module is installed. 'Install-Module AzureAD'"
         break
     }
-    elseif($errMsg.Contains("*Connect-AzureAD*")){
+    elseif($_.Exception -like "*Connect-AzureAD*"){
         Write-Warning "`t $_.Exception"
         Write-Output "Calling Connect-AzureAD"
         try{Connect-AzureAD -ErrorAction stop
